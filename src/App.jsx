@@ -1,13 +1,28 @@
 import { Products } from "./components/Products";
 import productsJson from "./assets/products.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Sort } from "./components/Sort";
 import { Category } from "./components/Category";
 console.log(productsJson);
 
 function App() {
 
-  const [products, setProducts] = useState(productsJson);
+const [products, setProducts] = useState([])
+
+useEffect(() =>{ // wisowi this function only one time
+  fetch("https://639102970bf398c73a98b8ea.mockapi.io/items") // wenn will be sapros / res
+  .then((res) => { // togda
+    // console.log('OTWET', res)
+    return res.json(); // conwert otwet in json
+  })
+  .then((json) => {// togda
+    // console.log('MASSIW',json)  // werni otwet w json
+    setProducts(json)
+  });
+}, [])  // [] - means didMount = perwiy render
+ 
+
+  // const [products, setProducts] = useState(productsJson);
 
   const addProduct = (id) => {
     const productsUpdate = products.map((product) =>
@@ -45,12 +60,12 @@ function App() {
   // Expensive
   const expensivePrice = products.reduce((total, item) => {
     return total.price > item.price ? total : item;
-  });
+  },0);
 
   // Cheapest
   const cheapestPrice = products.reduce((total, item) => {
     return total.price < item.price ? total : item;
-  });
+  },0);
 
   //! Products in Fridge
   // Total Price
