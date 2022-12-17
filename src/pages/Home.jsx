@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { Products } from "../components/Products";
+import { Sort } from "../components/Sort";
+import { Category } from "../components/Category";
+
 // import productsJson from "./assets/products.json";
 
 export const Home = () => {
@@ -109,10 +112,16 @@ export const Home = () => {
   }
   console.log("productsJsxInFridge: ", productsJsxInFridge);
   return (
+    <div className="collumn justify-center ">
+      <div className="header flex justify-between h-50">
+        <Category />
+        <Sort />
+      </div>
       <div className="flex flex-row justify-between ">
         <div className="pl-5rem font-bold text-4xl text-gray-500">
           {isLoading && "Loading..."}
         </div>
+
         <div className=" basis-4/6 grid grid-cols-4 gap-1 content-start bg-orange-50">
           {products.map((product) => (
             <Products
@@ -157,8 +166,8 @@ export const Home = () => {
           </div>
           {/* Products in Fridge */}
           <div className="products-in-fridge border-4 border-rose-50 p-5 mt-5">
-          <div className="total flex justify-center mt-6 text-orange-500 font-bold">
-                Products in fridge
+            <div className="total flex justify-center mt-6 text-orange-500 font-bold">
+              Products in fridge
             </div>
             <div className="flex justify-center mt-2 text-orange-500 font-bold ">
               Total: {countProductsInFridge}
@@ -180,5 +189,6 @@ export const Home = () => {
           </div>
         </div>
       </div>
+    </div>
   );
 };
