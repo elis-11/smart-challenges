@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Products } from "../components/Products";
 import { Sort } from "../components/Sort";
 import { Category } from "../components/Category";
+import logo from "../assets/10.png";
+import { Link } from "react-router-dom";
 
 // import productsJson from "./assets/products.json";
 
@@ -114,6 +116,9 @@ export const Home = () => {
   return (
     <div className="collumn justify-center ">
       <div className="header flex justify-between h-50">
+        <Link to="/">
+          <img className="w-10 h-10 ml-4 mb-0 " src={logo} alt="Logo" />
+        </Link>
         <Category />
         <Sort />
       </div>
