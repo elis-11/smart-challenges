@@ -116,9 +116,6 @@ export const Home = () => {
   return (
     <div className="collumn justify-center ">
       <div className="header flex justify-between h-50">
-        <Link to="/">
-          <img className="w-10 h-10 ml-4 mb-0 " src={logo} alt="Logo" />
-        </Link>
         <Category />
         <Sort />
       </div>

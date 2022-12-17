@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export const Category = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const categories = ["vegetable", "fruit", "berry", "cheese"];
+  const categories = ["Necklace", "Bracelet", "Ring", "Earrings"];
 
   const activeCategory = (index) => {
     setActiveIndex(index);
