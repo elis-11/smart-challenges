@@ -1,15 +1,28 @@
-import { Products } from "./components/Products";
-import productsJson from "./assets/products.json";
-import { useState } from "react";
-console.log(productsJson);
+import { useEffect, useState } from "react";
+import { Products } from "../components/Products";
+// import productsJson from "./assets/products.json";
 
-function App() {
-  const [products, setProducts] = useState(productsJson);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const categories = ["vegetable", "fruit", "berry", "cheese"];
-  const activeCategory = (index) => {
-    setActiveIndex(index);
-  };
+export const Home = () => {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // wisowi this function only one time
+    fetch("https://639102970bf398c73a98b8ea.mockapi.io/items") // wenn will be sapros / res
+      .then((res) => {
+        // togda
+        // console.log('OTWET', res)
+        return res.json(); // conwert otwet in json
+      })
+      .then((json) => {
+        // togda
+        // console.log('MASSIW',json)  // werni otwet w json
+        setProducts(json);
+        setIsLoading(false);
+      });
+  }, []); // [] - means didMount = perwiy render
+
+  // const [products, setProducts] = useState(productsJson);
 
   const addProduct = (id) => {
     const productsUpdate = products.map((product) =>
@@ -38,9 +51,7 @@ function App() {
   // Total Products
   const totalProducts = products.length;
 
-  // Total Price
-  const totalPrice = products.reduce((total, item) => total + item.price, 0);
-
+  //! Display Products
   // Total Volume
   const totalVolume = products.reduce((total, item) => {
     return total + item.volume;
@@ -49,31 +60,16 @@ function App() {
   // Expensive
   const expensivePrice = products.reduce((total, item) => {
     return total.price > item.price ? total : item;
-  });
+  }, 0);
 
   // Cheapest
   const cheapestPrice = products.reduce((total, item) => {
     return total.price < item.price ? total : item;
-  });
+  }, 0);
 
-  //! Fridge Price
-
-  const countProductsInFridge = products.reduce(
-    (total, product) => total + product.count,
-    0
-  );
-
-  //! All Products
-  const countProducts = products.reduce((total, item) => {
-    total[item.title] = total[item.title] ? total[item.title] + 1 : 1;
-    return total;
-  },[]);
-  console.log("countProducts:", countProducts);
- const productsJsx = []
- for(let key in countProducts) {
-   productsJsx.push(<div> {key}: {countProducts[key]}</div>)
- }
-
+  //! Products in Fridge
+  // Total Price
+  const totalPrice = products.reduce((total, item) => total + item.price, 0);
 
   const fridgeTotalPrice = products.reduce((total, item) => {
     return total + item.price * item.count;
@@ -88,28 +84,36 @@ function App() {
     return total - item.volume * item.count;
   }, 100);
 
-  //! Products in Fridge
+  // Total Products in Fridge
+  const countProductsInFridge = products.reduce(
+    (total, product) => total + product.count,
+    0
+  );
+  console.log("countProductsInFridge", countProductsInFridge);
+  //! Display Products in Fridge
+  const displayProductsInFridge = products
+    .filter((product) => product.count > 0)
+    .reduce((total, product) => {
+      total[product.title] = total[product.title]
+        ? total[product.title] * product.length
+        : 1;
+      return total;
+    }, {});
+  console.log("displayProductsInFridge:", displayProductsInFridge);
 
+  const productsJsxInFridge = [];
+  for (let key in displayProductsInFridge) {
+    productsJsxInFridge.push(
+      ` ${key}: ${""} ${displayProductsInFridge[key]} ${","}`
+    );
+  }
+  console.log("productsJsxInFridge: ", productsJsxInFridge);
   return (
-    <div className="collumn items-center">
-      <div className="flex  items-center justify-center font-bold text-4xl text-orange-300 mx-auto my-3">
-        <h2 className="">Smart Fridge</h2>
-      </div>
-      <div className="categories flex m-5">
-        {categories.map((value, index) => (
-          <div
-            key={value}
-            onClick={() => activeCategory(index)}
-            className={`${
-              activeIndex === index ? "active" : ""
-            } bg-orange-300 hover:bg-orange-500 active:bg-orange-400 text-white p-3 m-3 rounded-2xl opacity-50 cursor-pointer`}
-          >
-            {value}
-          </div>
-        ))}
-      </div>
       <div className="flex flex-row justify-between ">
-        <div className=" basis-3/5 grid grid-cols-4 gap-1 content-start bg-orange-50">
+        <div className="pl-5rem font-bold text-4xl text-gray-500">
+          {isLoading && "Loading..."}
+        </div>
+        <div className=" basis-4/6 grid grid-cols-4 gap-1 content-start bg-orange-50">
           {products.map((product) => (
             <Products
               key={product._id}
@@ -120,36 +124,32 @@ function App() {
             />
           ))}
         </div>
-
-        <div className="cart basis-2/5 flex flex-col bg-orange-100">
-          {/* Total Products */}
+        <div className="cart basis-2/6 flex flex-col bg-orange-100">
+          {/* All Products */}
           <div className="tota-products border-4 border-rose-50 p-5">
             <div className="total flex justify-center mt-6 text-orange-500 font-bold">
               Total Products: {totalProducts}
             </div>
-            <div className="total flex justify-center mt-6 text-orange-500 font-bold">
-              All Products:
-              {/* {countProducts} */}
-            </div>
+            <div className="total flex justify-center mt-6 text-orange-500 font-bold"></div>
             <div className="total flex justify-center mt-6 font-bold">
               Total volume: {totalVolume} from 100
             </div>
             <div className="expensive flex justify-center mt-6 font-bold">
-              Expensive: {expensivePrice.title} costs: {expensivePrice.price}{" "}
               {""}
               <img
                 src={expensivePrice.imageUrl}
                 className="w-8 h-8"
                 alt={expensivePrice.title}
-              />
+              />{" "}
+              costs: {expensivePrice.price}{" "}
             </div>
             <div className="cheapest flex justify-center mt-6 font-bold">
-              Cheapest: {cheapestPrice.title} costs: {cheapestPrice.price} {""}
               <img
                 src={cheapestPrice.imageUrl}
                 className="w-8 h-8"
                 alt={cheapestPrice.title}
-              />
+              />{" "}
+              costs: {cheapestPrice.price} {""}
             </div>
             <div className="total flex justify-center mt-6 font-bold">
               Total price: {totalPrice.toFixed(2)}
@@ -157,19 +157,20 @@ function App() {
           </div>
           {/* Products in Fridge */}
           <div className="products-in-fridge border-4 border-rose-50 p-5 mt-5">
-            <div className="flex justify-center mt-2 text-orange-500 font-bold ">
-              Products in fridge:
-              {countProducts}
-              {/* {prodInFr} */}
+          <div className="total flex justify-center mt-6 text-orange-500 font-bold">
+                Products in fridge
             </div>
             <div className="flex justify-center mt-2 text-orange-500 font-bold ">
-              Products in fridge:
+              Total: {countProductsInFridge}
+            </div>
+            <div className="flex justify-center mt-2 text-orange-500 font-bold ">
+              Products: {productsJsxInFridge}
             </div>
             <div className="total flex justify-center mt-6 font-bold">
               Total price: {fridgeTotalPrice.toFixed(2)}
             </div>
             <div className="total flex justify-center mt-6 font-bold">
-              Fridge volume: {fridgeTotalVolume.toFixed(0)} from 100
+              Volume: {fridgeTotalVolume.toFixed(0)} from 100
             </div>
           </div>
           <div className="need-for-fridge border-4 border-rose-50 p-5 mt-5">
@@ -179,8 +180,5 @@ function App() {
           </div>
         </div>
       </div>
-    </div>
   );
-}
-
-export default App;
+};

@@ -30,6 +30,22 @@ export const Products = ({
           >
             price: {product.price}
           </div>
+          <div className="sizes flex justify-between">
+              <h5>size: {" "}</h5>
+            <span className="flex justify-between px-1">
+              {product.sizes.map((size, index) => (
+                <span 
+                  onClick={() => setActiveSize(index)}
+                  key={size}
+                  className={`${
+                    activeSize === index ? "active:" : ""
+                  } px-2 mr-1 hover:bg-orange-300 active:bg-violet-100 cursor-pointer`}
+                >
+                  {size} 
+                </span>
+              ))}
+            </span>
+          </div>
           <div className="status flex justify-between ">
             {product.status.map((statId) => (
               <span
@@ -43,21 +59,7 @@ export const Products = ({
               </span>
             ))}
           </div>
-          <div className="sizes flex">
-            <span className="flex justify-between">
-              {product.sizes.map((size, index) => (
-                <span
-                  onClick={() => setActiveSize(i)}
-                  key={size}
-                  className={`${
-                    activeSize === index ? "active:" : ""
-                  } mr-1 hover:bg-orange-300 active:bg-violet-100 cursor-pointer`}
-                >
-                  {size} sm.
-                </span>
-              ))}
-            </span>
-          </div>
+          
           <div className="flex justify-center">
             <button
               onClick={() => addProduct(product._id)}
