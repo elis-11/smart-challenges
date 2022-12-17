@@ -1,6 +1,7 @@
+import { Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Cart } from "./pages/Cart";
-import { NotFound } from "./pages/NotFound";
+import { NotFound } from "./components/notfound/NotFound.jsx";
 
 function App() {
   return (
@@ -8,9 +9,12 @@ function App() {
       <div className="flex  items-center justify-center font-bold text-4xl text-orange-300 mx-auto my-2">
         <h2 className="">Smart Challenges</h2>
       </div>
-      <Home />
-      <Cart />
-      <NotFound />
+    <Routes>
+      <Route path="" element={<Home />} />
+      {/* <Route path="/product/:id" element={<Home />} /> */}
+      <Route path="cart" element={<Cart />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
     </div>
   );
 }
