@@ -16,7 +16,7 @@ export const Products = ({
       <div className="w-48 m-2 bg-orange-100 shadow-lg border-2 rounded border-red-100">
         <img
           src={product.imageUrl}
-          className="w-full h-24"
+          className="w-full h-36"
           alt={product.title}
         />
         <div className="data p-4">

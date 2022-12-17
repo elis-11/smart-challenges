@@ -13,7 +13,7 @@ export const Home = () => {
 
   useEffect(() => {
     // wisowi this function only one time
-    fetch("https://639102970bf398c73a98b8ea.mockapi.io/items") // wenn will be sapros / res
+    fetch("https://639102970bf398c73a98b8ea.mockapi.io/accessories") // wenn will be sapros / res
       .then((res) => {
         // togda
         // console.log('OTWET', res)
