@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { Products } from "../components/Products";
 import { Sort } from "../components/Sort";
 import { Category } from "../components/Category";
-import logo from "../assets/10.png";
-import { Link } from "react-router-dom";
 
 // import productsJson from "./assets/products.json";
 
@@ -25,6 +23,7 @@ export const Home = () => {
         setProducts(json);
         setIsLoading(false);
       });
+      window.scrollTo(0, 0);
   }, []); // [] - means didMount = perwiy render
 
   // const [products, setProducts] = useState(productsJson);
