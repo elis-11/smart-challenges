@@ -10,7 +10,7 @@ export const Category = () => {
 
   return (
     <>
-      <div className="categories flex ">
+      <div className="categories flex mt-12">
         {categories.map((value, index) => (
           <div
             key={value}

@@ -13,7 +13,7 @@ export const Products = ({
 
   return (
     <div>
-      <div className="w-48 m-2 bg-orange-100 shadow-lg border-2 rounded border-red-100">
+      <div className=" bg-orange-100 shadow-lg border-2 rounded border-red-100">
         <img
           src={product.imageUrl}
           className="w-full h-36"
@@ -63,14 +63,14 @@ export const Products = ({
           <div className="flex justify-center">
             <button
               onClick={() => addProduct(product._id)}
-              className="bg-green-300 w-8 hover:bg-green-500"
+              className="bg-orange-400 w-12 hover:bg-orange-500 rounded-full"
             >
               +
             </button>
             <div className="count px-3">{product.count}</div>
             <button
               onClick={() => removeProduct(product._id)}
-              className="bg-green-300 w-8 hover:bg-green-500"
+              className="bg-orange-400 w-12  hover:bg-orange-500 rounded-full"
             >
               -
             </button>

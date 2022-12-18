@@ -113,8 +113,8 @@ export const Home = () => {
   }
   console.log("productsJsxInFridge: ", productsJsxInFridge);
   return (
-    <div className="collumn justify-center ">
-      <div className="header flex justify-between h-50">
+    <div className="collumn justify-center  ">
+      <div className="header flex justify-between h-36 mx-12">
         <Category />
         <Sort />
       </div>
@@ -184,7 +184,7 @@ export const Home = () => {
             </div>
           </div>
           <div className="need-for-fridge border-4 border-rose-50 p-5 mt-5">
-            <div className="flex justify-center mt-2 text-orange-500 font-bold">
+            <div className="flex justify-center mt-2 text-orange-500 font-bold ">
               Free volume: {freeVolume.toFixed(0)} from 100
             </div>
           </div>

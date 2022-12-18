@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 
 function App() {
   return (
-    <div className="collumn items-center">
-      <div className="flex justify-between font-bold text-4xl text-orange-300 mx-2 my-2">
+    <div className="collumn items-center bg-orange-50">
+      <div className="flex justify-between font-bold text-4xl text-orange-300 h-20 mx-8 pt-8">
       <nav>
         <NavLink className="mr-4" to="/">Home</NavLink>
         <NavLink to="/cart">Cart</NavLink>

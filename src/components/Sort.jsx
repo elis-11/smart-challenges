@@ -31,7 +31,7 @@ export const Sort = () => {
               onClick={() => onClickListItem(index)}
               className={`${
                 selected === index ? "active:" : ""
-              } p-1 pl-3 my-0.5 w-40 bg-orange-50 font-bold border-b-2 hover:bg-orange-100 cursor-pointer`}
+              } pl-5 my-0.5 w-40 bg-orange-100 font-bold border-b-2 hover:bg-orange-50 cursor-pointer`}
             >
               {item}
             </div>
