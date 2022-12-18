@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { Products } from "../components/Products";
 import { Sort } from "../components/Sort";
-import { Category } from "../components/Category";
+import { Categories } from "../components/Categories";
 
 // import productsJson from "./assets/products.json";
 
 export const Home = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [categoryId, setCategoryId] = useState(0)
+  const [sort, setSort] = useState(0)
 
   useEffect(() => {
     // wisowi this function only one time
@@ -115,7 +117,7 @@ export const Home = () => {
   return (
     <div className="collumn justify-center  ">
       <div className="header flex justify-between h-36 mx-12">
-        <Category />
+        <Categories value={categoryId} onClickCategory={(i)=>setCategoryId(i)}/>
         <Sort />
       </div>
       <div className="flex flex-row justify-between ">
