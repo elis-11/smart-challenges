@@ -3,7 +3,7 @@
         "_id": "p1",
         "title": "Planet Star Necklace",
         "weight": "18",
-        "category": "Necklace",
+        "category": "1",
         "status": [
             0,
             1
@@ -23,7 +23,7 @@
         "_id": "p2",
         "title": "Helloice Spinner Ring",
         "weight": "32",
-        "category": "Ring",
+        "category": "3",
         "status": [
             0
         ],
@@ -42,7 +42,7 @@
         "_id": "p3",
         "title": "Helloice Moonstone Bracelet",
         "weight": "27",
-        "category": "Bracelet",
+        "category": "2",
         "status": [
             0,
             1
@@ -62,7 +62,7 @@
         "_id": "p4",
         "title": "Brilliant Square Earrings",
         "weight": "19",
-        "category": "Earrings",
+        "category": "4",
         "status": [
             0,
             1
@@ -81,7 +81,7 @@
         "_id": "p5",
         "title": "Crystal Bracelet Set",
         "weight": "25",
-        "category": "Bracelet",
+        "category": "2",
         "status": [
             0
         ],
@@ -100,7 +100,7 @@
         "_id": "p6",
         "title": "Helloice Triangle Ring",
         "weight": "18",
-        "category": "Ring",
+        "category": "3",
         "status": [
             0,
             1
@@ -119,7 +119,7 @@
         "_id": "p7",
         "title": "Helloice 0.5Ct Earrings",
         "weight": "15",
-        "category": "Earrings",
+        "category": "4",
         "status": [
             0,
             1
@@ -139,7 +139,7 @@
         "_id": "p8",
         "title": "Design Engagement Ring",
         "weight": "15",
-        "category": "Ring",
+        "category": "3",
         "status": [
             0,
             1

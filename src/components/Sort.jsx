@@ -1,13 +1,16 @@
 import { useState } from "react";
 
-export const Sort = () => {
+export const Sort = ({ value, onChangeSort }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [selected, setSelected] = useState(0);
-  const list = ["popular", "price", "alphabet"];
-  const sortItem = list[selected];
+  const list = [
+    {name: "popular", sort: 'rating'},
+    {name: "price", sort: 'price'},
+    {name: "alphabet", sort: 'title'},
+  ]
+  // const sortName = list[value].name;
 
-  const onClickListItem = (index) => {
-    setSelected(index); // select one item
+  const onClickListItem = (i) => {
+    onChangeSort(i); // select one item
     setIsVisible(false); // & hide popup
   };
 
@@ -19,21 +22,20 @@ export const Sort = () => {
           onClick={() => setIsVisible(!isVisible)}
           className="ml-2 border-dotted border-orange-500 border-b-4 text-orange-500 cursor-pointer"
         >
-          {/* {list[selected]} */}
-          {sortItem}
+          {value.name}
         </span>
       </div>
       {isVisible && (
         <div className="sort_popup mt-3  ">
-          {list.map((item, index) => (
+          {list.map((obj, i) => (
             <div
-              key={item}
-              onClick={() => onClickListItem(index)}
+              key={i}
+              onClick={() => onClickListItem(obj)}
               className={`${
-                selected === index ? "active:" : ""
+                value.sort === obj.sort ? "active" : ""
               } pl-5 my-0.5 w-40 bg-orange-100 font-bold border-b-2 hover:bg-orange-50 cursor-pointer`}
             >
-              {item}
+              {obj.name}
             </div>
           ))}
         </div>

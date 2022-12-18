@@ -2,18 +2,26 @@ import { useEffect, useState } from "react";
 import { Products } from "../components/Products";
 import { Sort } from "../components/Sort";
 import { Categories } from "../components/Categories";
-
 // import productsJson from "./assets/products.json";
 
 export const Home = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [categoryId, setCategoryId] = useState(0)
-  const [sort, setSort] = useState(0)
+  const [categoryId, setCategoryId] = useState(0);
+  const [sortType, setSortType] = useState({
+    name: "popular",
+    sort: "rating",
+  });
+  console.log(categoryId, sortType);
 
   useEffect(() => {
+    setIsLoading(true);
     // wisowi this function only one time
-    fetch("https://639102970bf398c73a98b8ea.mockapi.io/accessories") // wenn will be sapros / res
+    fetch(
+      `https://639102970bf398c73a98b8ea.mockapi.io/accessories?${
+        categoryId > 0 ? `category=${categoryId}` : ""
+      }&sortBy=${sortType.sort}&order=desc`
+    ) // wenn will be sapros / res
       .then((res) => {
         // togda
         // console.log('OTWET', res)
@@ -25,9 +33,8 @@ export const Home = () => {
         setProducts(json);
         setIsLoading(false);
       });
-      window.scrollTo(0, 0);
-  }, []); // [] - means didMount = perwiy render
-
+    window.scrollTo(0, 0);
+  }, [categoryId, sortType]); // [] - means didMount = perwiy render
   // const [products, setProducts] = useState(productsJson);
 
   const addProduct = (id) => {
@@ -95,7 +102,6 @@ export const Home = () => {
     (total, product) => total + product.count,
     0
   );
-  console.log("countProductsInFridge", countProductsInFridge);
   //! Display Products in Fridge
   const displayProductsInFridge = products
     .filter((product) => product.count > 0)
@@ -105,7 +111,6 @@ export const Home = () => {
         : 1;
       return total;
     }, {});
-  console.log("displayProductsInFridge:", displayProductsInFridge);
 
   const productsJsxInFridge = [];
   for (let key in displayProductsInFridge) {
@@ -113,12 +118,14 @@ export const Home = () => {
       ` ${key}: ${""} ${displayProductsInFridge[key]} ${","}`
     );
   }
-  console.log("productsJsxInFridge: ", productsJsxInFridge);
   return (
     <div className="collumn justify-center  ">
       <div className="header flex justify-between h-36 mx-12">
-        <Categories value={categoryId} onClickCategory={(i)=>setCategoryId(i)}/>
-        <Sort />
+        <Categories
+          value={categoryId}
+          onChangeCategory={(i) => setCategoryId(i)}
+        />
+        <Sort value={sortType} onChangeSort={(i) => setSortType(i)} />
       </div>
       <div className="flex flex-row justify-between ">
         <div className="pl-5rem font-bold text-4xl text-gray-500">
