@@ -16,11 +16,14 @@ export const Home = () => {
 
   useEffect(() => {
     setIsLoading(true);
+
+    const order = sortType.sort.includes("-") ? "asc" : "desc";  // delete minus ('-')
+    const sortBy = sortType.sort.replace("-", "");  // if minus ? "asc" : "desc
+    const category = categoryId > 0 ? `category=${categoryId}` : "";
+
     // wisowi this function only one time
     fetch(
-      `https://639102970bf398c73a98b8ea.mockapi.io/accessories?${
-        categoryId > 0 ? `category=${categoryId}` : ""
-      }&sortBy=${sortType.sort}&order=desc`
+      `https://639102970bf398c73a98b8ea.mockapi.io/accessories?${category}&sortBy=${sortBy}&order=${order}`,
     ) // wenn will be sapros / res
       .then((res) => {
         // togda
