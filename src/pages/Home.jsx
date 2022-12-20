@@ -8,6 +8,7 @@ export const Home = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
+  const [searchValue, setSearchValue] = useState('')
   const [sortType, setSortType] = useState({
     name: "popular",
     sort: "rating",
@@ -20,10 +21,11 @@ export const Home = () => {
     const order = sortType.sort.includes("-") ? "asc" : "desc"; // delete minus ('-')
     const sortBy = sortType.sort.replace("-", ""); // if minus ? "asc" : "desc
     const category = categoryId > 0 ? `category=${categoryId}` : "";
+    const search = searchValue ? `&search=${searchValue}` : "";
 
     const fetchData = async () => {
       let response = await fetch(
-        `https://639102970bf398c73a98b8ea.mockapi.io/accessories?${category}&sortBy=${sortBy}&order=${order}`
+        `https://639102970bf398c73a98b8ea.mockapi.io/accessories?${category}&sortBy=${sortBy}&order=${order}${search}`
       ); // wenn will be sapros / response
       response = await response.json(); // conwert otwet in json, werni otwet w json
       setProducts(response);
@@ -31,7 +33,7 @@ export const Home = () => {
     };
     fetchData();
     window.scrollTo(0, 0);
-  }, [categoryId, sortType]); // [] - means didMount = perwiy render
+  }, [categoryId, sortType, searchValue]); // [] - means didMount = perwiy render
   // const [products, setProducts] = useState(productsJson);
 
   const addProduct = (id) => {

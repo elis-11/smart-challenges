@@ -3,6 +3,12 @@ import logo from "../assets/10.png";
 import { Search } from "../components/search/Search";
 
 export const Header = () => {
+
+
+// const searchedProducts = products.filter(product => {
+// return product.name.toLowerCase().includes(searchValue.toLowerCase())
+// })
+
   return (
     <div className="content flex flex-col">
       <div className="flex justify-between font-bold text-4xl text-orange-300 h-20 mx-8 pt-8">
