@@ -17,25 +17,19 @@ export const Home = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    const order = sortType.sort.includes("-") ? "asc" : "desc";  // delete minus ('-')
-    const sortBy = sortType.sort.replace("-", "");  // if minus ? "asc" : "desc
+    const order = sortType.sort.includes("-") ? "asc" : "desc"; // delete minus ('-')
+    const sortBy = sortType.sort.replace("-", ""); // if minus ? "asc" : "desc
     const category = categoryId > 0 ? `category=${categoryId}` : "";
 
-    // wisowi this function only one time
-    fetch(
-      `https://639102970bf398c73a98b8ea.mockapi.io/accessories?${category}&sortBy=${sortBy}&order=${order}`,
-    ) // wenn will be sapros / res
-      .then((res) => {
-        // togda
-        // console.log('OTWET', res)
-        return res.json(); // conwert otwet in json
-      })
-      .then((json) => {
-        // togda
-        // console.log('MASSIW',json)  // werni otwet w json
-        setProducts(json);
-        setIsLoading(false);
-      });
+    const fetchData = async () => {
+      let response = await fetch(
+        `https://639102970bf398c73a98b8ea.mockapi.io/accessories?${category}&sortBy=${sortBy}&order=${order}`
+      ); // wenn will be sapros / response
+      response = await response.json(); // conwert otwet in json, werni otwet w json
+      setProducts(response);
+      setIsLoading(false);
+    };
+    fetchData();
     window.scrollTo(0, 0);
   }, [categoryId, sortType]); // [] - means didMount = perwiy render
   // const [products, setProducts] = useState(productsJson);
