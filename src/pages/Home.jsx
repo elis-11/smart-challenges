@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { Products } from "../components/Products";
 import { Sort } from "../components/Sort";
 import { Categories } from "../components/Categories";
+import { Pagination } from "../components/pagination/Pagination";
 // import productsJson from "./assets/products.json";
 
 export const Home = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
-  const [searchValue, setSearchValue] = useState('')
+  const [searchValue, setSearchValue] = useState("");
+  const [currentPage, setCurrentPage] = useState(1); // pagination
   const [sortType, setSortType] = useState({
     name: "popular",
     sort: "rating",
@@ -25,7 +27,7 @@ export const Home = () => {
 
     const fetchData = async () => {
       let response = await fetch(
-        `https://639102970bf398c73a98b8ea.mockapi.io/accessories?${category}&sortBy=${sortBy}&order=${order}${search}`
+        `https://639102970bf398c73a98b8ea.mockapi.io/accessories?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
       ); // wenn will be sapros / response
       response = await response.json(); // conwert otwet in json, werni otwet w json
       setProducts(response);
@@ -33,7 +35,7 @@ export const Home = () => {
     };
     fetchData();
     window.scrollTo(0, 0);
-  }, [categoryId, sortType, searchValue]); // [] - means didMount = perwiy render
+  }, [categoryId, sortType, searchValue, currentPage]); // [] - means didMount = perwiy render
   // const [products, setProducts] = useState(productsJson);
 
   const addProduct = (id) => {
@@ -198,6 +200,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
+      <Pagination onChangePage={(number) => setCurrentPage(number)} />
     </div>
   );
 };
