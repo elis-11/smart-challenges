@@ -4,10 +4,12 @@ import { Sort } from "../components/Sort";
 import { Categories } from "../components/Categories";
 import { Pagination } from "../components/pagination/Pagination";
 import { DataContext } from "../App";
+import { AddProducts } from "../components/products/AddProducts";
+import { ProductsInFridge } from "../components/products/ProductsInFridge";
 // import productsJson from "./assets/products.json";
 
 export const Home = () => {
-  const {searchValue} = useContext(DataContext)
+  const { searchValue } = useContext(DataContext);
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
@@ -148,55 +150,23 @@ export const Home = () => {
         <div className="cart basis-2/6 flex flex-col bg-orange-100">
           {/* All Products */}
           <div className="tota-products border-4 border-rose-50 p-5">
-            <div className="total flex justify-center mt-6 text-orange-500 font-bold">
-              Total Products: {totalProducts}
-            </div>
-            <div className="total flex justify-center mt-6 text-orange-500 font-bold"></div>
-            <div className="total flex justify-center mt-6 font-bold">
-              Total volume: {totalVolume} from 100
-            </div>
-            <div className="expensive flex justify-center mt-6 font-bold">
-              {""}
-              <img
-                src={expensivePrice.imageUrl}
-                className="w-8 h-8"
-                alt={expensivePrice.title}
-              />{" "}
-              costs: {expensivePrice.price}{" "}
-            </div>
-            <div className="cheapest flex justify-center mt-6 font-bold">
-              <img
-                src={cheapestPrice.imageUrl}
-                className="w-8 h-8"
-                alt={cheapestPrice.title}
-              />{" "}
-              costs: {cheapestPrice.price} {""}
-            </div>
-            <div className="total flex justify-center mt-6 font-bold">
-              Total price: {totalPrice.toFixed(2)}
-            </div>
-          </div>
-          {/* Products in Fridge */}
-          <div className="products-in-fridge border-4 border-rose-50 p-5 mt-5">
-            <div className="total flex justify-center mt-6 text-orange-500 font-bold">
-              Products in fridge
-            </div>
-            <div className="flex justify-center mt-2 text-orange-500 font-bold ">
-              Total: {countProductsInFridge}
-            </div>
-            <div className="flex justify-center mt-2 text-orange-500 font-bold ">
-              Products: {productsJsxInFridge}
-            </div>
-            <div className="total flex justify-center mt-6 font-bold">
-              Total price: {fridgeTotalPrice.toFixed(2)}
-            </div>
-            <div className="total flex justify-center mt-6 font-bold">
-              Volume: {fridgeTotalVolume.toFixed(0)} from 100
-            </div>
-          </div>
-          <div className="need-for-fridge border-4 border-rose-50 p-5 mt-5">
-            <div className="flex justify-center mt-2 text-orange-500 font-bold ">
-              Free volume: {freeVolume.toFixed(0)} from 100
+            <AddProducts
+              totalProducts={totalProducts}
+              totalPrice={totalPrice}
+              totalVolume={totalVolume}
+              expensivePrice={expensivePrice}
+              cheapestPrice={cheapestPrice}
+            />
+            <ProductsInFridge
+              countProductsInFridge={countProductsInFridge}
+              productsJsxInFridge={productsJsxInFridge}
+              fridgeTotalPrice={fridgeTotalPrice}
+              fridgeTotalVolume={fridgeTotalVolume}
+            />
+            <div className="need-for-fridge border-4 border-rose-50 p-5 mt-5">
+              <div className="flex justify-center mt-2 text-orange-500 font-bold ">
+                Free volume: {freeVolume.toFixed(0)} from 100
+              </div>
             </div>
           </div>
         </div>

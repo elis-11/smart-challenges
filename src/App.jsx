@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div className="collumn items-center bg-orange-50">
-      <DataContext.Provider value={{ searchValue, setSearchValue }}>
+      <DataContext.Provider value={{searchValue, setSearchValue }}>
         <Header />
         <Routes>
           <Route path="" element={<Home />} />
