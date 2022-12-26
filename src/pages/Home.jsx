@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Products } from "../components/Products";
 import { Sort } from "../components/Sort";
 import { Categories } from "../components/Categories";
 import { Pagination } from "../components/pagination/Pagination";
+import { DataContext } from "../App";
 // import productsJson from "./assets/products.json";
 
 export const Home = () => {
+  const {searchValue} = useContext(DataContext)
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
-  const [searchValue, setSearchValue] = useState("");
   const [currentPage, setCurrentPage] = useState(1); // pagination
   const [sortType, setSortType] = useState({
     name: "popular",
