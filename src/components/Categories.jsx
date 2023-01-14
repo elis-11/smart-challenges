@@ -3,7 +3,7 @@ import { useState } from "react";
 export const Categories = ({value, onChangeCategory}) => {
   // console.log(value)
   const [activeIndex, setActiveIndex] = useState(0);
-  const categories = ["All", "Necklace", "Bracelet", "Ring", "Earrings"];
+  const categories = ["All", "Necklace", "Bracelet", "Ring", "Earrings", "Watches"];
 
   return (
     <>
